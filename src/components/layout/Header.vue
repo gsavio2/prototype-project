@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
     .header{
-        
+        bottom: 0;
     }
 </style>
 
