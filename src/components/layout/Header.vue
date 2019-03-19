@@ -15,7 +15,7 @@
                     <b-nav-item-dropdown right>
                     <template slot="button-content">Usuário</template>
                     <b-dropdown-item to="/perfil">Perfil</b-dropdown-item>
-                    <b-dropdown-item to="/login">Logout</b-dropdown-item>
+                    <b-dropdown-item to="/login">Sair</b-dropdown-item>
                     </b-nav-item-dropdown>  
                 </b-navbar-nav>
                 </b-collapse>
