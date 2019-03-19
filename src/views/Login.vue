@@ -12,7 +12,7 @@
             <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>-->
-        <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="login">Entrar</button>
+        <b-button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="login">Entrar</b-button>
         <small>
             <router-link to="/register">Registre-se
             </router-link>
