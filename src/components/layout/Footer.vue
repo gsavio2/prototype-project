@@ -2,7 +2,7 @@
     <footer>
         <div class="footer-app">
             <hr/>
-            <router-link class="mx-auto" to="/">www.prototype-project.com</router-link> &copy; 2019 - {{ new Date().getFullYear() }}           
+            <router-link class="mx-auto" to="/">www.prototype-project.com</router-link> &copy; 2019 – {{ new Date().getFullYear() }}           
         </div>
     </footer>
 </template>
