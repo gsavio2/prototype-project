@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-gonic/contrib/cors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,8 +20,7 @@ func main() {
 		})
 		api.GET("")
 	}
-}
 
-func carregaUsuarios() {
-
+	r.Use(cors.Default())
+	r.Run()
 }
