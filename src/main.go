@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/gin-gonic/contrib/cors"
 	"github.com/pedrohmachado/prototype-project/src/httpd/handler"
 	"github.com/pedrohmachado/prototype-project/src/platform/user"
 
@@ -26,10 +25,5 @@ func main() {
 		api.POST("/user", handler.UserPost(users))
 	}
 
-	config := cors.DefaultConfig()
-	config.AllowedOrigins = []string{"http://localhost:8080/"}
-	// config.AllowedOrigins == []string{"http://google.com", "http://facebook.com"}
-
-	r.Use(cors.New(config))
 	r.Run(":8081")
 }

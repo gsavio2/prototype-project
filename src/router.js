@@ -22,42 +22,37 @@ export default new Router({
     {
       path: '/perfil',
       name: 'perfil',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Perfil.vue')
+      component: () => import('./views/Perfil.vue')
     },
     {
       path: '/eventos',
       name: 'eventos',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Eventos.vue')
+      
+      component: () => import('./views/Eventos.vue')
     },
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Login.vue')
+     
+      component: () => import('./views/Login.vue')
     },
     {
       path: '/register',
       name: 'register',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Register.vue')
+     
+      component: () => import('./views/Register.vue')
     },
     {
       path: '/produtos',
       name: 'produtos',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Produtos.vue')
+    
+      component: () => import('./views/Produtos.vue')
+    },
+    {
+      path: '/teste',
+      name: 'teste',
+    
+      component: () => import('./views/Teste.vue')
     }
   ]
 })
