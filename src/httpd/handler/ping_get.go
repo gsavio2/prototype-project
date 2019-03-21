@@ -16,7 +16,7 @@ func Ping1(c *gin.Context) {
 // Ping2 test ###
 func Ping2(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]string{
-		"message": "ping",
+		"message": "pinga",
 	})
 }
 
