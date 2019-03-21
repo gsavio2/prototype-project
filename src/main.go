@@ -26,6 +26,10 @@ func main() {
 		api.POST("/user", handler.UserPost(users))
 	}
 
-	r.Use(cors.Default())
+	config := cors.DefaultConfig()
+	config.AllowedOrigins = []string{"http://localhost:8080/"}
+	// config.AllowedOrigins == []string{"http://google.com", "http://facebook.com"}
+
+	r.Use(cors.New(config))
 	r.Run(":8081")
 }

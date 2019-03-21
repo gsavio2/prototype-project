@@ -33,14 +33,14 @@
           placeholder="Digite sua senha" />
       </b-form-group>
 
-      <b-form-group id="exampleInputGroup4" label="Food:" label-for="exampleInput4">
+      <!--<b-form-group id="exampleInputGroup4" label="Comida:" label-for="exampleInput4">
         <b-form-select id="exampleInput4" :options="foods" required v-model="form.food" />
-      </b-form-group>
+      </b-form-group>-->
 
-      <b-form-group id="exampleGroup4">
+      <b-form-group id="exampleGroup4" label="Interesses:">
         <b-form-checkbox-group v-model="form.checked" id="exampleChecks">
-          <b-form-checkbox value="me">Check me out</b-form-checkbox>
-          <b-form-checkbox value="that">Check that out</b-form-checkbox>
+          <b-form-checkbox value="me">Anunciar</b-form-checkbox>
+          <b-form-checkbox value="that">Conhecer</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
 
