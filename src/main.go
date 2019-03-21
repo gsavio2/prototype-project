@@ -2,7 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/contrib/cors"
-	"net/http"
+	"github.com/pedrohmachado/prototype-project/src/httpd/handler"
+	"github.com/pedrohmachado/prototype-project/src/platform/user"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,17 +11,21 @@ import (
 func main() {
 	r := gin.Default()
 
-	// rotas /api
+	users := user.New()
 
 	api := r.Group("/api")
 	{
-		// get ping
-		api.GET("/ping", func(c *gin.Context) {
-			c.JSON(http.StatusOK, "pong")
-		})
-		api.GET("")
+		ping := api.Group("/ping")
+		{
+			ping.GET("/one", handler.Ping1)
+			ping.GET("/two", handler.Ping2)
+			ping.GET("/three", handler.Ping3("message", "ping"))
+		}
+
+		api.GET("/user", handler.UserGet(users))
+		api.POST("/user", handler.UserPost(users))
 	}
 
 	r.Use(cors.Default())
-	r.Run()
+	r.Run(":8081")
 }
