@@ -8,15 +8,11 @@
             <input type="text" class="form-control" placeholder="Email" v-model="user.email">
             <b-button type="submit">Enviar</b-button>
         </b-form>
-        <!--<tr v-for="user of users" :key="user.email">
-            <td>
-                {{user.name}}
-            </td>
-            <td>
-                {{user.email}}
-            </td>
-        </tr>-->
-        <b-table striped hover :items="users" />
+        <b-table striped hover :items="users" :fields="fields">
+           <template slot="acoes">
+               <b-button>Excluir</b-button>
+           </template>
+        </b-table>
     </div>
 </template>
 
@@ -24,25 +20,32 @@
 import Usuario from "../services/teste";
 
 export default {
-    data(){
+    data() {
         return {
+            
             user: {
                 name: '',
                 email: '',
             },
-            users: []
+            users: [],
+            fields: ['Name', 'Email', 'acoes'],
         }
     },
     mounted(){
-        Usuario.getUser().then(resposta => {
-            console.log(resposta.data)
-            this.users = resposta.data
-        })
+        this.getUser()
     },
+
     methods:{
+        getUser(){
+            Usuario.getUser().then(resposta => {
+                this.users = resposta.data
+            })
+        },
         postUser(){
             Usuario.postUser(this.user).then(resposta =>{
+                this.user = {}
                 alert("Salvo com sucesso")
+                this.getUser()
             })
         }
     }

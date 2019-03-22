@@ -9,7 +9,7 @@ import (
 
 //UserPostRequest struct
 type UserPostRequest struct {
-	//att type tag
+	//attr type tag
 	Name  string `json: "name"`
 	Email string `json: "email"`
 }
