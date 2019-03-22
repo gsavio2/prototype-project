@@ -1,5 +1,9 @@
 package handler
 
-func deleteUser() {
+import (
+	"github.com/gin-gonic/gin"
+)
+
+func UserDelete() gin.HandlerFunc {
 
 }

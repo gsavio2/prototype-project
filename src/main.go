@@ -34,6 +34,7 @@ func main() {
 
 		api.GET("/user", handler.UserGet(users))
 		api.POST("/user", handler.UserPost(users))
+		api.PUT("/user/{name}", handler.UserPut(users))
 	}
 
 	r.Run(":8081")

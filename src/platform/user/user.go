@@ -8,6 +8,10 @@ type Getter interface {
 	GetAll() []User
 }
 
+type Updater interface {
+	Update(user User, name string)
+}
+
 // User struct
 type User struct {
 	//Id    int32  `json: "id"`
@@ -35,4 +39,19 @@ func (u *Users) Add(user User) {
 // GetAll user in Users
 func (u *Users) GetAll() []User {
 	return u.Users
+}
+
+// Update user in *Users
+func (u *Users) Update(user User, name string) {
+	for index, userr := range u.Users {
+		if userr.Name == name {
+			u.Users = append(u.Users[:index], u.Users[index+1:]...)
+		}
+		user.Name = name
+		u.Users = append(u.Users, user)
+	}
+}
+
+func (u *Users) Delete(user User) {
+
 }
