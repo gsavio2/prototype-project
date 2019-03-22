@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/pedrohmachado/prototype-project/src/httpd/handler"
 	"github.com/pedrohmachado/prototype-project/src/platform/user"
 
@@ -9,6 +10,16 @@ import (
 
 func main() {
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		// AllowAllOrigins permite requisição de qualquer origem (depois configurar corretamente)
+		AllowAllOrigins:  true,
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           86400,
+	}))
 
 	users := user.New()
 
