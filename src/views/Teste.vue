@@ -1,21 +1,22 @@
 <template>
     <div class="teste">
         {{user.name}}
-        <b-form class="form-teste" @submit.prevent="post">
+        <b-form class="form-teste" @submit.prevent="postUser">
             <label>Name</label>
             <input type="text" class="form-control" placeholder="Name" v-model="user.name">
             <label>Email</label>
             <input type="text" class="form-control" placeholder="Email" v-model="user.email">
             <b-button type="submit">Enviar</b-button>
         </b-form>
-        <tr v-for="user of users" :key="user.email">
-            <td>a
+        <!--<tr v-for="user of users" :key="user.email">
+            <td>
                 {{user.name}}
             </td>
             <td>
                 {{user.email}}
             </td>
-        </tr>
+        </tr>-->
+        <b-table striped hover :items="users" />
     </div>
 </template>
 
@@ -25,21 +26,25 @@ import Usuario from "../services/teste";
 export default {
     data(){
         return {
-            user:{
+            user: {
                 name: '',
                 email: '',
             },
-            users:[]
+            users: []
         }
     },
     mounted(){
         Usuario.getUser().then(resposta => {
-            console.log(resposta)
+            console.log(resposta.data)
+            this.users = resposta.data
         })
     },
     methods:{
-
-
+        postUser(){
+            Usuario.postUser(this.user).then(resposta =>{
+                alert("Salvo com sucesso")
+            })
+        }
     }
 }
 </script>
