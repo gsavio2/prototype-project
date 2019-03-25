@@ -1,41 +1,29 @@
 package main
 
 import (
-	"github.com/gin-contrib/cors"
-	"github.com/pedrohmachado/prototype-project/src/httpd/handler"
-	"github.com/pedrohmachado/prototype-project/src/platform/user"
+	"log"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/rs/cors"
+
+	"github.com/pedrohmachado/prototype-project/src/httpd/handler"
+
+	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	r := gin.Default()
+	r := mux.NewRouter()
 
-	r.Use(cors.New(cors.Config{
-		// AllowAllOrigins permite requisição de qualquer origem (depois configurar corretamente)
-		AllowAllOrigins:  true,
-		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH"},
-		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "User-Agent", "Referrer", "Host", "Token"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-		MaxAge:           86400,
-	}))
+	u := usuario.Novo()
 
-	users := user.New()
+	c := cors.AllowAll().Handler(r)
 
-	api := r.Group("/api")
-	{
-		ping := api.Group("/ping")
-		{
-			ping.GET("/one", handler.Ping1)
-			ping.GET("/two", handler.Ping2)
-			ping.GET("/three", handler.Ping3("message", "ping"))
-		}
+	r.HandleFunc("/api/user", handler.ListaTodos(u)).Methods("GET")
+	r.HandleFunc("/api/user/{id}", handler.Lista(u)).Methods("GET")
+	r.HandleFunc("/api/user", handler.Novo(u)).Methods("POST")
+	r.HandleFunc("/api/user/{id}", handler.Exclui(u)).Methods("DELETE")
 
-		api.GET("/user", handler.UserGet(users))
-		api.POST("/user", handler.UserPost(users))
-		api.PUT("/user/{name}", handler.UserPut(users))
-	}
-
-	r.Run(":8081")
+	log.Fatal(http.ListenAndServe(":8081", c))
 }

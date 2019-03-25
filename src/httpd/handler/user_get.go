@@ -1,16 +1,29 @@
 package handler
 
 import (
+	"encoding/json"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
-	"github.com/pedrohmachado/prototype-project/src/platform/user"
+	"github.com/gorilla/mux"
+
+	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
 )
 
-//UserGet get all users
-func UserGet(users user.Getter) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		results := users.GetAll()
-		c.JSON(http.StatusOK, results)
+// ListaTodos os usuarios
+func ListaTodos(u usuario.ListaTodos) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		resultado := u.ListaTodos()
+		json.NewEncoder(w).Encode(resultado)
+	}
+}
+
+//Lista um usuario pelo id
+func Lista(u usuario.Lista) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		params := mux.Vars(r)
+		resultado := u.Lista(params["id"])
+		json.NewEncoder(w).Encode(resultado)
 	}
 }

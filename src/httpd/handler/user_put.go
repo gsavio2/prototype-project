@@ -4,16 +4,19 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/gorilla/mux"
+
 	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
 )
 
-// Novo adiciona usuario
-func Novo(u usuario.Adiciona) func(http.ResponseWriter, *http.Request) {
+// Altera usuario
+func Altera(uA usuario.Altera, uL usuario.Lista) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		var usuario usuario.Usuario
+		params := mux.Vars(r)
+		usuario := uL.Lista(params["id"])
 		_ = json.NewDecoder(r.Body).Decode(&usuario)
-		u.Adiciona(usuario)
-		json.NewEncoder(w).Encode(usuario)
+		resultado := uA.Altera(params["id"])
+		json.NewEncoder(w).Encode(resultado)
 	}
 }
