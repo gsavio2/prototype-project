@@ -19,7 +19,8 @@ func AlteraProduto(u *usuario.Usuarios) func(http.ResponseWriter, *http.Request)
 		produtos := u.ListaTodosProduto(params["id"])
 		produto := u.ListaProduto(produtos, params["id_produto"])
 		// ######################################
-		_ = json.NewDecoder(r.Body).Decode(&usuario)
+
+		_ = json.NewDecoder(r.Body).Decode(&produto)
 		resultado := u.AlteraProduto(usuario, produto, params["id"], params["id_produto"])
 		json.NewEncoder(w).Encode(resultado)
 	}
