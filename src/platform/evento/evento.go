@@ -14,8 +14,8 @@ type Evento struct {
 	Descricao     string            `json: "descricao"`
 	Criador       usuario.Usuario   `json: "criador"`
 	Participantes []usuario.Usuario `json: "participantes"`
-	DataCriacao   string            `json: "data_criacao"`
-	DataEvento    string            `json: "data_evento"`
+	DataCriacao   string            `json: "dataCriacao"`
+	DataEvento    string            `json: "dataEvento"`
 }
 
 // Eventos struct modelo
