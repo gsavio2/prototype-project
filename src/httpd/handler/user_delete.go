@@ -8,8 +8,8 @@ import (
 	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
 )
 
-// Exclui usuario
-func Exclui(u usuario.Exclui) func(http.ResponseWriter, *http.Request) {
+// ExcluiUsuario exclui usuario
+func ExcluiUsuario(u usuario.Exclui) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		params := mux.Vars(r)

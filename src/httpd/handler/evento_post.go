@@ -18,7 +18,7 @@ func NovoEvento(e *evento.Eventos, u *usuario.Usuarios) func(http.ResponseWriter
 		usuario := u.Lista(params["id"])
 		var evento evento.Evento
 		_ = json.NewDecoder(r.Body).Decode(&evento)
-		resultado := e.NovoEvento(usuario, evento)
+		resultado := e.Adiciona(usuario, evento)
 		json.NewEncoder(w).Encode(resultado)
 	}
 }

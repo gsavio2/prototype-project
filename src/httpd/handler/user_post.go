@@ -7,8 +7,8 @@ import (
 	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
 )
 
-// Novo adiciona usuario
-func Novo(u usuario.Adiciona) func(http.ResponseWriter, *http.Request) {
+// NovoUsuario adiciona usuario
+func NovoUsuario(u usuario.Adiciona) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		var usuario usuario.Usuario

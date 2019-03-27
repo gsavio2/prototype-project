@@ -9,8 +9,8 @@ import (
 	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
 )
 
-// ListaTodos os usuarios
-func ListaTodos(u usuario.ListaTodos) func(http.ResponseWriter, *http.Request) {
+// ListaTodosUsuario lista todos os usuarios
+func ListaTodosUsuario(u usuario.ListaTodos) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		resultado := u.ListaTodos()
@@ -18,8 +18,8 @@ func ListaTodos(u usuario.ListaTodos) func(http.ResponseWriter, *http.Request) {
 	}
 }
 
-//Lista um usuario pelo id
-func Lista(u usuario.Lista) func(http.ResponseWriter, *http.Request) {
+//ListaUsuario lista um usuario pelo id
+func ListaUsuario(u usuario.Lista) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		params := mux.Vars(r)
