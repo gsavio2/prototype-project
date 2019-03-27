@@ -31,7 +31,8 @@ func Novo() *Eventos {
 // NovoEvento cria novo evento
 func (e *Eventos) NovoEvento(usuario usuario.Usuario, evento Evento) []Evento {
 	evento.Criador = usuario
-	layout := "01/02/2006"
+	//layout do formato de data/hora
+	layout := "02/01/2006 15:04"
 	evento.DataCriacao = time.Now().Format(layout)
 	e.Eventos = append(e.Eventos, evento)
 	return e.Eventos
