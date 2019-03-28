@@ -61,7 +61,9 @@ func (u *Usuarios) Lista(id string) Usuario {
 
 // Adiciona adiciona usuario a usuarios
 func (u *Usuarios) Adiciona(usuario Usuario) {
-	u.Usuarios = append(u.Usuarios, usuario)
+	if usuario.Nome != "" && usuario.Email != "" {
+		u.Usuarios = append(u.Usuarios, usuario)
+	}
 }
 
 // Exclui usuario de usuarios

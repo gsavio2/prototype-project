@@ -9,6 +9,7 @@ type Produto struct {
 	ID        string          `json: "id"`
 	Descricao string          `json: "descricao"`
 	Dono      usuario.Usuario `json: "dono"`
+	Status    string          `json: "status"`
 }
 
 // Produtos struct modelo
@@ -26,6 +27,7 @@ func Novo() *Produtos {
 // Adiciona produto a produtos
 func (p *Produtos) Adiciona(produto Produto, usuario usuario.Usuario) []Produto {
 	produto.Dono = usuario
+	produto.Status = "ativo"
 	p.Produtos = append(p.Produtos, produto)
 	return p.Produtos
 }

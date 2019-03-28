@@ -10,12 +10,14 @@ import (
 
 // Evento struct modelo
 type Evento struct {
+	// definir quais serão os status do evento
 	ID            string            `json: "id"`
 	Descricao     string            `json: "descricao"`
 	Criador       usuario.Usuario   `json: "criador"`
 	Participantes []usuario.Usuario `json: "participantes"`
 	DataCriacao   string            `json: "dataCriacao"`
 	DataEvento    string            `json: "dataEvento"`
+	Status        string            `json: "status"`
 }
 
 // Eventos struct modelo
@@ -33,6 +35,8 @@ func Novo() *Eventos {
 // Adiciona cria novo evento
 func (e *Eventos) Adiciona(usuario usuario.Usuario, evento Evento) []Evento {
 	evento.Criador = usuario
+	evento.Participantes = append(evento.Participantes, evento.Criador)
+	evento.Status = "ativo"
 	//layout do formato de data/hora
 	layout := "02/01/2006 15:04"
 	evento.DataCriacao = time.Now().Format(layout)
@@ -55,12 +59,25 @@ func (e *Eventos) Lista(id string) Evento {
 	return Evento{}
 }
 
-// ListaTodosUsuario lista todos os eventos de um usuario pelo id do usuario
-func (e *Eventos) ListaTodosUsuario(usuario usuario.Usuario) []Evento {
+// ListaTodosDono lista todos os eventos que o usuario é dono pelo id do usuario
+func (e *Eventos) ListaTodosDono(usuario usuario.Usuario) []Evento {
 	var eventos []Evento
 	for _, evento := range e.Eventos {
 		if evento.Criador.ID == usuario.ID {
 			eventos = append(eventos, evento)
+		}
+	}
+	return eventos
+}
+
+// ListaTodosParticipantes lista todos os eventos que um usuario participa pelo id do usuario
+func (e *Eventos) ListaTodosParticipante(usuario usuario.Usuario) []Evento {
+	var eventos []Evento
+	for _, evento := range e.Eventos {
+		for _, participante := range evento.Participantes {
+			if participante.ID == usuario.ID {
+				eventos = append(eventos, evento)
+			}
 		}
 	}
 	return eventos
@@ -86,16 +103,58 @@ func (e *Eventos) ListaProdutos(participantes []usuario.Usuario, produtos []prod
 }
 
 // Exclui pelo id do evento
-func (e *Eventos) Exclui() {
+func (e *Eventos) Exclui(id string) []Evento {
+	for index, evento := range e.Eventos {
+		if evento.ID == id {
+			e.Eventos = append(e.Eventos[:index], e.Eventos[index+1:]...)
+			return e.Eventos
+		}
+	}
+	return e.Eventos
+}
 
+// AdicionaParticipante adiciona usuario participante no evento
+func (e *Eventos) AdicionaParticipante(participante usuario.Usuario, evento Evento) Evento {
+	evento.Participantes = append(evento.Participantes, participante)
+	return evento
+}
+
+// AtualizaUsuario atualiza a lista de eventos após a alteração de um usuario
+func (e *Eventos) AtualizaUsuario(usuario usuario.Usuario, evento Evento) Evento {
+
+	// altera criador (pelo id) do evento
+	if usuario.ID == evento.Criador.ID {
+		evento.Criador = usuario
+	}
+
+	// altera participante (pelo id) do evento
+	for index, participante := range evento.Participantes {
+		if participante.ID == usuario.ID {
+			//exclui antigo registro de participante
+			evento.Participantes = append(evento.Participantes[:index], evento.Participantes[index+1:]...)
+		}
+	}
+	//adiciona novo registro de participante com o mesmo id do antigo
+	evento.Participantes = append(evento.Participantes, usuario)
+	return evento
+}
+
+// Atualiza atualiza a lista de eventos (passando o evento atualizado por parametro)
+func (e *Eventos) Atualiza(evento Evento) []Evento {
+	id := evento.ID
+	e.Eventos = e.Exclui(id)
+	e.Eventos = append(e.Eventos, evento)
+	return e.Eventos
 }
 
 // Altera pelo id do evento
-func (e *Eventos) Altera() {
-
+func (e *Eventos) Altera(evento Evento) Evento {
+	//todo
+	return evento
 }
 
-// EncerraEvento pelo id do evento
-func (e *Eventos) EncerraEvento() {
-
+// Encerra evento pelo id do evento
+func (e *Eventos) Encerra(evento Evento) Evento {
+	evento.Status = "encerrado"
+	return evento
 }
