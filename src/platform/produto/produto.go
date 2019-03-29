@@ -68,3 +68,25 @@ func (p *Produtos) Exclui(id string) []Produto {
 	}
 	return p.Produtos
 }
+
+// Altera altera produto pelo id (e retorna o produto alterado)
+func (p *Produtos) Altera(produto Produto, id string) Produto {
+	p.Produtos = p.Exclui(id)
+	produto.ID = id
+	p.Produtos = append(p.Produtos, produto)
+	return produto
+}
+
+// AtualizaUsuario atualiza os dados do usuario (dono do produto)
+func (p *Produtos) AtualizaUsuario(usuario usuario.Usuario, produto Produto) Produto {
+	produto.Dono = usuario
+	return produto
+}
+
+// Atualiza atualiza a lista dos produtos
+func (p *Produtos) Atualiza(produto Produto) []Produto {
+	id := produto.ID
+	p.Produtos = p.Exclui(id)
+	p.Produtos = append(p.Produtos, produto)
+	return p.Produtos
+}

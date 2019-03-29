@@ -1,19 +1,21 @@
 package handler
 
-// AlteraProduto altera produto
-// func AlteraProduto(u *usuario.Usuarios) func(http.ResponseWriter, *http.Request) {
-// 	return func(w http.ResponseWriter, r *http.Request) {
-// 		w.Header().Set("Content-Type", "application/json")
+import (
+	"encoding/json"
+	"net/http"
 
-// 		// ###### melhorar o bloco abaixo #######
-// 		params := mux.Vars(r)
-// 		usuario := u.Lista(params["id"])
-// 		produtos := u.ListaTodosProduto(params["id"])
-// 		produto := u.ListaProduto(produtos, params["id_produto"])
-// 		// ######################################
+	"github.com/gorilla/mux"
+	"github.com/pedrohmachado/prototype-project/src/platform/produto"
+)
 
-// 		_ = json.NewDecoder(r.Body).Decode(&produto)
-// 		resultado := u.AlteraProduto(usuario, produto, params["id"], params["id_produto"])
-// 		json.NewEncoder(w).Encode(resultado)
-// 	}
-// }
+//AlteraProduto altera produto pelo id do produto
+func AlteraProduto(p *produto.Produtos) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		params := mux.Vars(r)
+		produto := p.Lista(params["id_produto"])
+		_ = json.NewDecoder(r.Body).Decode(&produto)
+		resultado := p.Altera(produto, params["id_produto"])
+		json.NewEncoder(w).Encode(resultado)
+	}
+}

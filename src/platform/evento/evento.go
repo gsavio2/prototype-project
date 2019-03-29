@@ -70,7 +70,7 @@ func (e *Eventos) ListaTodosDono(usuario usuario.Usuario) []Evento {
 	return eventos
 }
 
-// ListaTodosParticipantes lista todos os eventos que um usuario participa pelo id do usuario
+// ListaTodosParticipante lista todos os eventos que um usuario participa pelo id do usuario
 func (e *Eventos) ListaTodosParticipante(usuario usuario.Usuario) []Evento {
 	var eventos []Evento
 	for _, evento := range e.Eventos {
@@ -119,6 +119,16 @@ func (e *Eventos) AdicionaParticipante(participante usuario.Usuario, evento Even
 	return evento
 }
 
+// RemoveParticipante remove usuario participante do evento
+func (e *Eventos) RemoveParticipante(usuario usuario.Usuario, evento Evento) Evento {
+	for index, participante := range evento.Participantes {
+		if participante == usuario {
+			evento.Participantes = append(evento.Participantes[:index], evento.Participantes[index+1:]...)
+		}
+	}
+	return evento
+}
+
 // AtualizaUsuario atualiza a lista de eventos após a alteração de um usuario
 func (e *Eventos) AtualizaUsuario(usuario usuario.Usuario, evento Evento) Evento {
 
@@ -148,8 +158,14 @@ func (e *Eventos) Atualiza(evento Evento) []Evento {
 }
 
 // Altera pelo id do evento
-func (e *Eventos) Altera(evento Evento) Evento {
-	//todo
+func (e *Eventos) Altera(evento Evento, id string) Evento {
+	// resgata evento que será alterado
+	auxEvento := e.Lista(evento.ID)
+	// atributos imutáveis nessa alteração
+	evento.ID = id
+	evento.DataCriacao = auxEvento.DataCriacao
+	evento.Criador = auxEvento.Criador
+	evento.Participantes = auxEvento.Participantes
 	return evento
 }
 
