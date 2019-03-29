@@ -26,7 +26,11 @@ func main() {
 	e := evento.Novo()
 	p := produto.Novo()
 
+	// config cors
 	c := cors.AllowAll().Handler(r)
+	cors.New(cors.Options{
+		AllowedMethods: []string{"GET", "POST", "DELETE", "PUT"},
+	})
 
 	// crud usuarios
 	r.HandleFunc("/api/user", handler.NovoUsuario(u)).Methods("POST")
@@ -34,7 +38,6 @@ func main() {
 	r.HandleFunc("/api/user/{id}", handler.ListaUsuario(u)).Methods("GET")
 	r.HandleFunc("/api/user/{id}", handler.AlteraUsuario(u, e, p)).Methods("PUT")
 
-	// vvvvvvvvvvvvvvvvv deletar usuario não pode ser utilizado vvvvvvvvvvvvvvvv
 	// r.HandleFunc("/api/user/{id}", handler.ExcluiUsuario(u)).Methods("DELETE")
 
 	// crud produtos (agora)
@@ -55,7 +58,8 @@ func main() {
 	r.HandleFunc("/api/evento/{id_evento}/user/{id}", handler.AdicionaParticipante(e, u)).Methods("POST")
 	r.HandleFunc("/api/evento/{id_evento}/user/{id}", handler.RemoveParticipante(e, u)).Methods("PUT")
 	r.HandleFunc("/api/evento/{id_evento}", handler.AlteraEvento(e)).Methods("PUT")
-	r.HandleFunc("/api/evento/{id_evento}", handler.ExcluiEvento(e)).Methods("DELETE")
+
+	// r.HandleFunc("/api/evento/{id_evento}", handler.ExcluiEvento(e)).Methods("DELETE")
 	r.HandleFunc("/api/evento/{id_evento}", handler.EncerraEvento(e)).Methods("PUT")
 
 	log.Println("[SERVER] Listening on http://localhost:8081")

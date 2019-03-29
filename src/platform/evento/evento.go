@@ -13,11 +13,12 @@ type Evento struct {
 	// definir quais serão os status do evento
 	ID            string            `json: "id"`
 	Descricao     string            `json: "descricao"`
-	Criador       usuario.Usuario   `json: "criador"`
-	Participantes []usuario.Usuario `json: "participantes"`
+	Local         string            `json: "local"`
 	DataCriacao   string            `json: "dataCriacao"`
 	DataEvento    string            `json: "dataEvento"`
 	Status        string            `json: "status"`
+	Criador       usuario.Usuario   `json: "criador"`
+	Participantes []usuario.Usuario `json: "participantes"`
 }
 
 // Eventos struct modelo
