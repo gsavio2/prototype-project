@@ -1,46 +1,42 @@
 <template>
 <div class="form-register">
-    <b-form class="" @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="cadastraUsuario" @reset="limpaForm" v-if="show">
       <b-form-group
-        id="exampleInputGroup1"
+        id="emailGroup"
         label="E-mail:"
-        label-for="exampleInput1"
+        label-for="emailInput"
         description="Seu e-mail não será compartilhado com ninguém."
       >
         <b-form-input
-          id="exampleInput1"
+          id="emailInput"
           type="email"
-          v-model="form.email"
+          v-model="user.email"
           required
-          placeholder="email@exemplo.com" />
+          placeholder="exemplo@brejaria.com" />
       </b-form-group>
 
-      <b-form-group id="exampleInputGroup2" label="Nome:" label-for="exampleInput2">
+      <b-form-group id="nomeGroup" label="Nome:" label-for="nomeInput">
         <b-form-input
-          id="exampleInput2"
+          id="nomeInput"
           type="text"
-          v-model="form.name"
+          v-model="user.nome"
           required
           placeholder="Digite seu nome" />
       </b-form-group>
 
-      <b-form-group id="exampleInputGroup2" label="Senha:" label-for="exampleInput3">
+      <b-form-group id="senhaGroup" label="Senha:" label-for="senha">
         <b-form-input
-          id="exampleInput3"
+          id="senha"
           type="password"
-          v-model="form.password"
+          v-model="user.senha"
           required
           placeholder="Digite sua senha" />
       </b-form-group>
 
-      <!--<b-form-group id="exampleInputGroup4" label="Comida:" label-for="exampleInput4">
-        <b-form-select id="exampleInput4" :options="foods" required v-model="form.food" />
-      </b-form-group>-->
-
-      <b-form-group id="exampleGroup4" label="Interesses:">
-        <b-form-checkbox-group v-model="form.checked" id="exampleChecks">
-          <b-form-checkbox value="me">Anunciar</b-form-checkbox>
-          <b-form-checkbox value="that">Conhecer</b-form-checkbox>
+      <b-form-group id="interessesGroup" label="Interesses:">
+        <b-form-checkbox-group v-model="user.perfil" id="interessesCheck">
+          <b-form-checkbox value="1">Anunciar</b-form-checkbox>
+          <b-form-checkbox value="2">Conhecer</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
 
@@ -51,33 +47,44 @@
 </template>
 
 <script>
+
+  import Usuario from "../services/user";
+
   export default {
     data() {
       return {
-        form: {
+        user: {
           email: '',
-          name: '',
-          food: null,
-          checked: []
+          nome: '',
+          perfil: [],
+          senha: '',
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
         show: true
       }
     },
     methods: {
-      onSubmit(evt) {
+      cadastraUsuario(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+        //alert(JSON.stringify(this.user))
+        if () {
+              Usuario.cadastraUsuario(this.user).then(resposta =>{
+                this.user = {}
+                alert("Salvo com sucesso")
+                this.$router.go("")
+            })
+        } else {
+          alert("Escolher ao menos uma opção de \"Interesses\"")
+        }
+        
       },
-      onReset(evt) {
+      limpaForm(evt) {
         evt.preventDefault()
-        /* Reset our form values */
-        this.form.email = ''
-        this.form.name = ''
-        this.form.password = ''
-        this.form.food = null
-        this.form.checked = []
-        /* Trick to reset/clear native browser form validation state */
+        /* limpa todos os campos */
+        this.user.email = ''
+        this.user.nome = ''
+        this.user.senha = ''
+        this.user.perfil = []
+        /* limpa validações do navegador referente aos campos */
         this.show = false
         this.$nextTick(() => {
           this.show = true

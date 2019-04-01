@@ -123,7 +123,7 @@ func (e *Eventos) AdicionaParticipante(participante usuario.Usuario, evento Even
 // RemoveParticipante remove usuario participante do evento
 func (e *Eventos) RemoveParticipante(usuario usuario.Usuario, evento Evento) Evento {
 	for index, participante := range evento.Participantes {
-		if participante == usuario {
+		if participante.ID == usuario.ID {
 			evento.Participantes = append(evento.Participantes[:index], evento.Participantes[index+1:]...)
 		}
 	}

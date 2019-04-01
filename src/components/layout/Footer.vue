@@ -1,8 +1,9 @@
 <template>
     <footer>
         <div class="footer-app">
-            <hr/>
-            <router-link class="mx-auto" to="/">www.prototype-project.com</router-link> &copy; 2019 – {{ new Date().getFullYear() }}           
+            <div class="footer">
+                <router-link class="mx-auto" to="/"> BREJARIA </router-link> &copy; 2019 – {{ new Date().getFullYear() }}   
+            </div>        
         </div>
     </footer>
 </template>
@@ -14,5 +15,9 @@ export default {
 </script>
 
 <style scoped>
-
+    .footer{
+        border-top: 1px solid slategray;
+        margin: 5px;
+        padding: 10px;
+    }
 </style>

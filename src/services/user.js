@@ -1,14 +1,12 @@
-/*import { http } from "./config";
+import { http } from "./config";
 
 export default {
 
-    getUser:() => {
+    listaTodosUsuario:() => {
         return http.get('user')
     },
 
-    postUser:(user) => {
+    cadastraUsuario:(user) => {
         return http.post('user', user)
     }
-
-
-}*/
+}

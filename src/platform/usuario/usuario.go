@@ -1,5 +1,9 @@
 package usuario
 
+import (
+	"strconv"
+)
+
 // ListaTodos lista todos os usuarios
 type ListaTodos interface {
 	ListaTodos() []Usuario
@@ -27,9 +31,11 @@ type Exclui interface {
 
 // Usuario struct modelo
 type Usuario struct {
-	ID    string `json: "id"`
-	Nome  string `json: "nome"`
-	Email string `json: "email"`
+	ID     string   `json: "id"`
+	Nome   string   `json: "nome"`
+	Email  string   `json: "email"`
+	Perfil []string `json: "perfil"`
+	Senha  string   `json: "senha"`
 }
 
 // Usuarios struct modelo
@@ -62,6 +68,7 @@ func (u *Usuarios) Lista(id string) Usuario {
 // Adiciona adiciona usuario a usuarios
 func (u *Usuarios) Adiciona(usuario Usuario) {
 	if usuario.Nome != "" && usuario.Email != "" {
+		usuario.ID = strconv.Itoa(len(u.ListaTodos()) + 1)
 		u.Usuarios = append(u.Usuarios, usuario)
 	}
 }
