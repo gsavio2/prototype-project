@@ -1,6 +1,7 @@
 package evento
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/pedrohmachado/prototype-project/src/platform/produto"
@@ -12,6 +13,7 @@ import (
 type Evento struct {
 	// definir quais serão os status do evento
 	ID            string            `json: "id"`
+	Nome          string            `json: "nome"`
 	Descricao     string            `json: "descricao"`
 	Local         string            `json: "local"`
 	DataCriacao   string            `json: "dataCriacao"`
@@ -35,6 +37,7 @@ func Novo() *Eventos {
 
 // Adiciona cria novo evento
 func (e *Eventos) Adiciona(usuario usuario.Usuario, evento Evento) []Evento {
+	evento.ID = strconv.Itoa(len(e.Eventos) + 1)
 	evento.Criador = usuario
 	evento.Participantes = append(evento.Participantes, evento.Criador)
 	evento.Status = "ativo"

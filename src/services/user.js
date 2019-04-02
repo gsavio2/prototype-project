@@ -8,5 +8,9 @@ export default {
 
     cadastraUsuario:(user) => {
         return http.post('user', user)
+    },
+
+    listaUsuario:(id) => {
+        return http.post('user', id)
     }
 }

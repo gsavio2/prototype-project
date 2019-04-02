@@ -41,6 +41,7 @@ func main() {
 	// r.HandleFunc("/api/user/{id}", handler.ExcluiUsuario(u)).Methods("DELETE")
 
 	// crud produtos (agora)
+	// criar metodo pra pegar id do usuario atraves do usuario logado
 	r.HandleFunc("/api/user/{id}/produto", handler.AdicionaProduto(p, u)).Methods("POST")
 	r.HandleFunc("/api/produto", handler.ListaTodosProduto(p)).Methods("GET")
 	r.HandleFunc("/api/produto/{id_produto}", handler.ListaProduto(p)).Methods("GET")

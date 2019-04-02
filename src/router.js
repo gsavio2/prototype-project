@@ -31,6 +31,12 @@ export default new Router({
       component: () => import('./views/Eventos.vue')
     },
     {
+      path: '/eventos/register',
+      name: 'eventosRegister',
+    
+      component: () => import('./views/EventosRegister.vue')
+    },
+    {
       path: '/login',
       name: 'login',
      
@@ -47,6 +53,12 @@ export default new Router({
       name: 'produtos',
     
       component: () => import('./views/Produtos.vue')
+    },
+    {
+      path: '/produtos/register',
+      name: 'produtosRegister',
+    
+      component: () => import('./views/ProdutosRegister.vue')
     },
     {
       path: '/teste',

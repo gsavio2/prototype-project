@@ -1,12 +1,15 @@
 package produto
 
 import (
+	"strconv"
+
 	"github.com/pedrohmachado/prototype-project/src/platform/usuario"
 )
 
 // Produto struct modelo
 type Produto struct {
 	ID        string          `json: "id"`
+	Nome      string          `json: "nome"`
 	Descricao string          `json: "descricao"`
 	Dono      usuario.Usuario `json: "dono"`
 	Status    string          `json: "status"`
@@ -26,6 +29,7 @@ func Novo() *Produtos {
 
 // Adiciona produto a produtos
 func (p *Produtos) Adiciona(produto Produto, usuario usuario.Usuario) []Produto {
+	produto.ID = strconv.Itoa(len(p.ListaTodos()) + 1)
 	produto.Dono = usuario
 	produto.Status = "ativo"
 	p.Produtos = append(p.Produtos, produto)

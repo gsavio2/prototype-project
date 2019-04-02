@@ -1,4 +1,6 @@
 <template>
+<div>
+<h1>Informe seus dados</h1>
 <div class="form-register">
     <b-form @submit="cadastraUsuario" @reset="limpaForm" v-if="show">
       <b-form-group
@@ -42,7 +44,9 @@
 
       <b-button class="btn btn-md btn-primary btn-block" type="submit" variant="dark">Enviar</b-button>
       <b-button class="btn btn-md btn-primary btn-block" type="reset" variant="danger">Limpar</b-button>
+ 
     </b-form>
+  </div>
   </div>
 </template>
 
