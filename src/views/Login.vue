@@ -3,10 +3,10 @@
     <form class="form-signin">
         <img class="mb-4" src="../assets/logo.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Dados de acesso</h1>
-        <label for="inputEmail" class="sr-only">Usuário</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="Usuário" required autofocus>
+        <label for="inputEmail" class="sr-only">E-mail</label>
+        <input type="text" id="inputEmail" v-model="login.email" class="form-control" placeholder="E-mail" required autofocus>
         <label for="inputPassword" class="sr-only">Senha</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+        <input type="password" id="inputPassword" v-model="login.senha" class="form-control" placeholder="Senha" required>
         <!--<div class="checkbox mb-3">
             <label>
             <input type="checkbox" value="remember-me"> Remember me
@@ -25,14 +25,15 @@ export default {
     name: 'login',
     data(){
         return{
-            
+            login: {
+              email: '',
+              senha: '',
+            }
         }
     },
     methods: 
         {
-            login: function (params) {
-                
-            }
+            
         }
 }
 </script>

@@ -36,7 +36,7 @@
       <b-form-group id="interessesGroup" label="Interesses:">
         <b-form-checkbox-group v-model="user.perfil" id="interessesCheck">
           <b-form-checkbox value="1">Anunciar</b-form-checkbox>
-          <b-form-checkbox value="2">Conhecer</b-form-checkbox>
+          <b-form-checkbox value="2">Consumir</b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
 
@@ -66,16 +66,15 @@
       cadastraUsuario(evt) {
         evt.preventDefault()
         //alert(JSON.stringify(this.user))
-        if () {
-              Usuario.cadastraUsuario(this.user).then(resposta =>{
-                this.user = {}
-                alert("Salvo com sucesso")
-                this.$router.go("")
-            })
+        if((this.user.perfil).length >= 1) {
+          Usuario.cadastraUsuario(this.user).then(resposta =>{
+            this.user = {}
+            alert("Salvo com sucesso")
+            this.$router.push({name: 'perfil'})
+          })
         } else {
-          alert("Escolher ao menos uma opção de \"Interesses\"")
+          alert("Selecionar ao menos uma opção de Interesses")
         }
-        
       },
       limpaForm(evt) {
         evt.preventDefault()
@@ -97,7 +96,7 @@
 <style scoped>
   .form-register {
     width: 100%;
-    max-width: 330px;
+    max-width: 400px;
     padding: 15px;
     margin: auto;
   }

@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import Usuario from "../services/user";
+
 export default {
   name: 'perfil'
 }
