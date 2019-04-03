@@ -37,7 +37,9 @@ func Novo() *Eventos {
 
 // Adiciona cria novo evento
 func (e *Eventos) Adiciona(usuario usuario.Usuario, evento Evento) []Evento {
-	evento.ID = strconv.Itoa(len(e.Eventos) + 1)
+	if evento.ID == "" {
+		evento.ID = strconv.Itoa(len(e.Eventos) + 1)
+	}
 	evento.Criador = usuario
 	evento.Participantes = append(evento.Participantes, evento.Criador)
 	evento.Status = "ativo"

@@ -12,5 +12,9 @@ export default {
 
     adicionaParticipante:(idEvento, idUsuario, evento) => {
         return http.post('evento/' + idEvento + '/user/' + idUsuario, evento)
+    },
+
+    removeParticipante:(idEvento, idUsuario, evento) => {
+        return http.put('evento/' + idEvento + '/user/' + idUsuario, evento)
     }
 }
